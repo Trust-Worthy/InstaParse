@@ -57,8 +57,44 @@ class PostViewController: UIViewController {
         view.endEditing(true)
 
         // TODO: Pt 1 - Create and save Post
+        // unwrap optional pickedImage
+        guard let image = pickedImage,
+              // create and compress image data (jpeg) from UIImage
+              let imageData = image.jpegData(compressionQuality: 0.1) else {
+            return
+        }
         
-
+        // create a parse file by providing a name and passing in the image data
+        let imageFile = ParseFile(name: "image.jpg", data: imageData)
+        
+        // create a post object
+        var post = Post()
+        
+        // set properties
+        post.imageFile = imageFile
+        post.caption = captionTextField.text
+        
+        // Set the user as the current user
+        post.user = User.current
+        
+        // save object in background (async)
+        post.save { [weak self] result in
+            
+            // Switch to main thread for any UI updates
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let post):
+                    print("✅ Post Saved! \(post)")
+                    
+                    // return to the previous view controller
+                    // it's like you share then the main screen comes back
+                    self?.navigationController?.popViewController(animated: true)
+                case .failure(let error):
+                    self?.showAlert(description: error.localizedDescription)
+                }
+            }
+        }
+              
     }
 
     @IBAction func onViewTapped(_ sender: Any) {
