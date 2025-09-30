@@ -1,0 +1,9 @@
+//
+//  Config.xcconfig
+//  lab-insta-parse
+//
+//  Created by Trust-Worthy on 9/29/25.
+//
+
+BACK4APP_APP_ID = pi02ay2ZrJVRD4lrT0USZdk3BcXL4rTvrZbFf3cj
+BACK4APP_CLIENT_KEY = EFC77kB3MXs3sKW0OysyI7mH5xSQACRFBAQH8Ynk

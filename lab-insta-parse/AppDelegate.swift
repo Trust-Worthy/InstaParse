@@ -8,6 +8,7 @@
 import UIKit
 
 // TODO: Pt 1 - Import Parse Swift
+import ParseCore
 import ParseSwift
 
 @main
@@ -19,17 +20,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: Pt 1 - Initialize Parse SDK
         // https://github.com/parse-community/Parse-Swift/blob/main/ParseSwift.playground/Sources/Common.swift
         
-        let parseConfig = ParseConfiguration {
-            $0.applicationId = "parseAppID"
-            $0.clientKey = "parseClientKey"
-            $0.server = "parseServerUrlString"
+        // Initialize ParseSwift
+        if let appID = Bundle.main.object(forInfoDictionaryKey: "BACK4APP_APP_ID") as? String,
+           let clientKey = Bundle.main.object(forInfoDictionaryKey: "BACK4APP_CLIENT_KEY") as? String {
+            
+            ParseSwift.initialize(
+                applicationId: appID,
+                clientKey: clientKey,
+                serverURL: URL(string: "https://parseapi.back4app.com")!
+            )
+        } else {
+            print("⚠️ Missing Back4App credentials in Info.plist")
         }
         
-        Parse.ini
-
 
         // TODO: Pt 1: - Instantiate and save a test parse object to your server
         // https://github.com/parse-community/Parse-Swift/blob/3d4bb13acd7496a49b259e541928ad493219d363/ParseSwift.playground/Pages/1%20-%20Your%20first%20Object.xcplaygroundpage/Contents.swift#L121
+        // Define a Parse Object
+        struct GameScore: ParseObject {
+            var originalData: Data?
+            
+            // Required fields
+            var objectId: String?
+            var createdAt: Date?
+            var updatedAt: Date?
+            var ACL: ParseACL?
+            
+            // Custom fields
+            var score: Int?
+            var playerName: String?
+            var cheatMode: Bool?
+        }
+        
+        // Save a test object
+        Task {
+            var gameScore = GameScore()
+            gameScore.score = 5000
+            gameScore.playerName = "Kingsley 🐶"
+            gameScore.cheatMode = true
+            
+            do {
+                try await gameScore.save()
+                print("👩‍🔬✅ SUCCESS! Parse object saved")
+            } catch {
+                print("👩‍🔬❌ Error saving Parse object: \(error)")
+            }
+        }
 
 
         return true
