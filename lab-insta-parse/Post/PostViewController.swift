@@ -80,8 +80,46 @@ extension PostViewController: PHPickerViewControllerDelegate {
     
     // function to receive the image the user picked to post
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        <#code#>
+        
+        // dismiss the picker
+        picker.dismiss(animated: true)
+        
+        // make sure a non-nil value was provided
+        guard let provider = results.first?.itemProvider,
+              // make sure the provider can load a UIImage
+              provider.canLoadObject(ofClass: UIImage.self) else {return}
+        
+        // Load a UIImage from the provider
+        provider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+            
+            // Make sure we can cast the returned object to a UIImage
+            guard let image = object as? UIImage else {
+                
+                // unable to cast to UIImage
+                self?.showAlert()
+                return
+            }
+            
+            // check for and handle any errors
+            if let error = error {
+                self?.showAlert(description: error.localizedDescription)
+                return
+            } else {
+                // UI updates --> setting image on image view should be done on main thread
+                DispatchQueue.main.async {
+                    
+                    // set image on preview image view
+                    self?.previewImageView.image = image
+                    
+                    // set image to use when saving post
+                    self?.pickedImage = image
+                }
+            }
+            
+        }
+        
+        
+        
     }
-    
     
 }
