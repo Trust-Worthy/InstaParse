@@ -8,6 +8,7 @@
 import UIKit
 
 // TODO: Pt 1 - Import Parse Swift
+import ParseSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // TODO: Pt 1 - Initialize Parse SDK
         // https://github.com/parse-community/Parse-Swift/blob/main/ParseSwift.playground/Sources/Common.swift
+        
+        let parseConfig = ParseConfiguration {
+            $0.applicationId = "parseAppID"
+            $0.clientKey = "parseClientKey"
+            $0.server = "parseServerUrlString"
+        }
+        
+        Parse.ini
 
 
         // TODO: Pt 1: - Instantiate and save a test parse object to your server

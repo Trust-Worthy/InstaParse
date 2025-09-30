@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67A77D992E8B6DD500781705 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 67A77D982E8B6DC900781705 /* Config.xcconfig */; };
 		CB13E51F2913A16C008F45BB /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB13E51E2913A16C008F45BB /* PostCell.swift */; };
 		CB13E5212913B10B008F45BB /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB13E5202913B10B008F45BB /* DateFormatter+Extensions.swift */; };
 		CB69974E2910F705007EDA6B /* Filmotype-Jade.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB69974C2910F704007EDA6B /* Filmotype-Jade.otf */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		67A77D982E8B6DC900781705 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		CB13E51E2913A16C008F45BB /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		CB13E5202913B10B008F45BB /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		CB69974C2910F704007EDA6B /* Filmotype-Jade.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Filmotype-Jade.otf"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		CB73D393290E3B4A00C12538 /* lab-insta-parse */ = {
 			isa = PBXGroup;
 			children = (
+				67A77D982E8B6DC900781705 /* Config.xcconfig */,
 				CB73D394290E3B4A00C12538 /* AppDelegate.swift */,
 				CB73D396290E3B4A00C12538 /* SceneDelegate.swift */,
 				CB7896ED2935DB4100635932 /* Models */,
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB73D3A1290E3B4C00C12538 /* LaunchScreen.storyboard in Resources */,
+				67A77D992E8B6DD500781705 /* Config.xcconfig in Resources */,
 				CB73D39E290E3B4C00C12538 /* Assets.xcassets in Resources */,
 				CB69974E2910F705007EDA6B /* Filmotype-Jade.otf in Resources */,
 				CB73D39C290E3B4A00C12538 /* Main.storyboard in Resources */,
