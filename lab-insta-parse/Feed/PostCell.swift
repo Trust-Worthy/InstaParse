@@ -20,12 +20,52 @@ class PostCell: UITableViewCell {
 
     func configure(with post: Post) {
         // TODO: Pt 1 - Configure Post Cell
+        
+        // username
+        if let user = post.user {
+            usernameLabel.text = user.username
+        }
+        
+        // Image
+        if let imageFile = post.imageFile,
+           let imageUrl = imageFile.url {
+            // Use AlamofireImage helper to fetch remote image from URL
+            
+            imageDataRequest = AF.request(imageUrl).responseImage { [weak self] response in
+                
+                switch response.result{
+                case .success(let image):
+                    // set image view image with fetched image
+                    self?.postImageView.image = image
+                case .failure(let error):
+                    print("❌ Error fetching image: \(error.localizedDescription)")
+                    break
+                }
+                
+            }
+        }
+        
+        // caption
+        captionLabel.text = post.caption
+        
+        // date
+        if let date = post.createdAt {
+            dateLabel.text = DateFormatter.postFormatter.string(from: date)
+        }
+        
+        
 
     }
-
+    
+    // cells are reused / refilled with data once you scroll
     override func prepareForReuse() {
         super.prepareForReuse()
         // TODO: P1 - Cancel image download
-
+        
+        // reset image view image
+        postImageView.image = nil
+        
+        // cancel image request
+        imageDataRequest?.cancel()
     }
 }
