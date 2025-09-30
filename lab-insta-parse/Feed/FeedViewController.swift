@@ -53,6 +53,9 @@ class FeedViewController: UIViewController {
             switch result {
             case .success(let posts):
                 // update local posts property with fetched posts
+                self?.posts = posts
+            case .failure(let error):
+                self?.showAlert(description: error.localizedDescription)
             }
             
         }
